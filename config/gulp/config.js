@@ -3,6 +3,7 @@ var envConfig = require('./utils/env');
 module.exports = function () {
     var root = '',
         src = root + 'src/',
+        server=root+'server/',
         config = root + 'config/',
         app = src + 'app/',
         test = src + 'test/',
@@ -63,6 +64,7 @@ module.exports = function () {
         root: root,
         config: config,
         src: src,
+        server:server,
         app: app,
         test: test,
         tmp: tmp,
