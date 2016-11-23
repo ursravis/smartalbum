@@ -1,0 +1,66 @@
+.panel-title {
+	font-weight: bold;
+	color: color(primary);
+}
+
+li {
+    font-size: large;
+}
+
+div.panel-heading {
+   font-size: x-large; 
+}
+/*img {
+  max-width: 100%; 
+}*/
+#listofImages{
+ background-color:white;
+
+  display: inline-block;
+  list-style-type: none;
+  margin: 5px;
+   /*border: 1px solid #ccc;*/
+}
+
+
+#listofImages li{
+ width: 300px;
+ height: 270px;
+ float: left;
+ margin: 2px;
+  border-color: black;
+ border: 1px solid black;
+ text-align: center;
+}
+.listImage {
+  vertical-align: top;
+  max-height: 100%;
+  max-width: 100%;
+   width: 300px;
+ height: 200px;
+ 
+
+}
+.image {
+  max-height: 100%;
+  max-width: 100%;
+
+ 
+
+}
+.thumbImage {
+  margin-top: 5px;
+  vertical-align: top;
+ text-align: right;
+
+ 
+
+}
+
+
+.modal.modal-wide .modal-dialog {
+  width: 80%;
+}
+.modal-wide .modal-body {
+  overflow-y: auto;
+}

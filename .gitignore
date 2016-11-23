@@ -1,0 +1,9 @@
+env.json
+.idea/
+/node_modules
+/bower_components
+/report
+/typings
+/src/tmp
+.DS_Store
+/src/assets/styles/*.css

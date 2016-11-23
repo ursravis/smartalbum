@@ -1,0 +1,50 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{pageTitle}}
+          <button class="btn btn-default pull-right" [routerLink]="['/project', -1]">New</button>
+    </div>
+
+    <!-- Filter the projects   -->
+    <div class='panel-body'>
+
+
+        <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
+
+        <div class='table-responsive'>
+            <table class='table' *ngIf='projects && projects.length'>
+                <thead>
+                    <tr>
+                        <!--<th>
+                            <button class='btn btn-primary' (click)='toggleImage()'>
+                                {{showImage ? 'Hide' : 'Show'}} Image
+                            </button>
+                        </th>-->
+                        <th>Project</th>
+                        <th>Created By</th>
+                        <th>No Of Images</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let project of projects '>
+                        <!--<td>
+                            <img *ngIf='showImage'
+                                 [src]='product.imageUrl'
+                                 [title]='product.productName | uppercase'
+                                 [style.width.px]='imageWidth' 
+                                 [style.margin.px]='imageMargin'>
+                        </td>-->
+                        <td> <a [routerLink]="['/project', project.projectId]">
+                            {{project.projectName}}
+                            </a>
+                        </td>
+                        <td>{{ project.createdBy }}</td>
+                        <td>{{ project.noOfImages }}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

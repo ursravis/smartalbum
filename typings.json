@@ -1,0 +1,5 @@
+{
+  "globalDependencies": {
+    "cropperjs": "registry:dt/cropperjs#0.0.0+20161003134358"
+  }
+}
