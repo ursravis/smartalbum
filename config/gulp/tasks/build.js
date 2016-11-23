@@ -14,12 +14,12 @@ var envVars = require('../utils/env-vars');
 require('@ngstarter/systemjs-extension')(config);
 
 gulp.task('build', function (done) {
-    runSequence('test', 'server','build-systemjs', 'build-assets', done);
+    runSequence('test', 'build-systemjs', 'build-assets', done);
 });
 
 /* Concat and minify/uglify all css, js, and copy fonts */
 gulp.task('build-assets', function (done) {
-    runSequence('clean-build', ['sass', 'fonts'], function () {
+    runSequence('clean-build', ['sass', 'fonts','server'], function () {
         gulp.src(config.app + '**/*.html', {
             base: config.app
         })
