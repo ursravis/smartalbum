@@ -12,6 +12,7 @@ import { IProject } from './project';
 @Injectable()
 export class ProjectService {
     private _projectUrl = 'http://smartalbumwebapi.azurewebsites.net/api/projects';
+    //private _projectUrl = 'http://localhost:2196/api/projects';
 private headers = new Headers({'Content-Type': 'application/json'});
     constructor(private _http: Http) { 
        // this._projectUrl=ENV.API_URL;

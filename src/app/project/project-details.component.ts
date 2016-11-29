@@ -23,6 +23,7 @@ export class ProjectDetailsComponent implements OnInit,OnDestroy {
      errorMessage: string;
      cropper:any;
      files:any[]=[];
+     loading :boolean;
     private sub:Subscription;
       
     constructor(private _route:ActivatedRoute,private _router:Router,private elementRef: ElementRef,private _projectService :ProjectService)
@@ -49,14 +50,19 @@ ngOnInit():void{
         });
 }
 OnSaveClick():void{
+    this.loading=true;
     if(this.project.projectId>0)
     {
     this._projectService.updateProject(this.project)
-    .then(()=>this.onBack());
+    .then(()=>{
+        this.loading=false;
+        this.onBack();});
     }
     else{
         this._projectService.createProject(this.project) 
-        .then(()=>this.onBack());
+        .then(()=>{
+        this.loading=false;
+        this.onBack();});
     }
 }
 onBack():void{
@@ -153,7 +159,8 @@ this.disableEdits=true;
         // Loop through each picture file
         for (var i = 0; i < input.files.length; i++) {
 
-            this.files.push(input.files[i]);
+            //this.files.push(input.files[i]);
+            var file=input.files[i];
 
             // Create an img element and add the image file data to it
             var img = document.createElement("img");
@@ -170,10 +177,12 @@ this.disableEdits=true;
 
                 // Resize the image
                 //var resized_img = this.resize(img);
-                var thumbNail=this.createThumbnail(img);
+                var thumbNail=this.createThumbnail(img,64,file.type);
                 var imageData=new SmartImage();
                 imageData.thumbnailSrc=thumbNail;
                 imageData.imageSrc=event.target.result;
+                imageData.imageName=file.name;
+                imageData.imageType=file.type;
                 // Push the img src (base64 string) into our array that we display in our html template
                 this.project.images.push(imageData);
             }, false);
@@ -183,7 +192,7 @@ this.disableEdits=true;
       
     }
 
-        createThumbnail(img:any,MAX_Pixel:number=64)
+        createThumbnail(img:any,MAX_Pixel:number=64,imageType:string='image/jpeg')
         {
         var canvas=document.createElement("canvas");
 
@@ -203,7 +212,8 @@ this.disableEdits=true;
 
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-                var dataUrl = canvas.toDataURL('image/jpeg');  
+                var dataUrl = canvas.toDataURL(imageType); 
+          
         
                 return dataUrl;
         }
@@ -241,9 +251,13 @@ this.disableEdits=true;
     createThumbsOnServer()
     {
         if(this.project != null)
-        {
+        {       
+            this.loading=true;    
             this._projectService.createThumb(this.project.projectId)
-            .then(project=> this._router.navigate(['projects/'+this.project.projectId]));
+            .then(project=>
+            this.onBack() 
+            //this._router.navigate(['projects/'+this.project.projectId])
+            );
         }
     }
 

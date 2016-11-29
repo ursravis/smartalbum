@@ -1,49 +1,49 @@
 <div class='panel panel-primary'>
-    <div class='panel-heading' style='font-size:large'>
-        {{pageTitle + ': ' + project.projectName }}
-        <button id="btnThumb" class="btn btn-default pull-right" (click)="createThumbsOnServer()" >Create Thumbs</button>
-    </div>
+	<div class='panel-heading' style='font-size:large'>
+		{{pageTitle + ': ' + project.projectName }}
+		<button id="btnThumb" class="btn btn-default pull-right" (click)="createThumbsOnServer()">Create Thumbs</button>
+	</div>
 
-    <div class='panel-body'>
-        <form class="form-inline">
-            <div class="form-group">
-                <label for="exampleInputName2">Project Name:</label>
-                <input name="projectNametxt"  type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe" [(ngModel)]="project.projectName">
-            </div>
-            <div class="form-group">
-                <label>Images</label>
-                <label class="btn btn-default btn-file"><input type="file" multiple (change)="fileChange(input)" #input />
+	<div class='panel-body'>
+		<form class="form-inline">
+			<div class="form-group">
+				<label for="exampleInputName2">Project Name:</label>
+				<input name="projectNametxt" type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe" [(ngModel)]="project.projectName">
+			</div>
+			<div class="form-group">
+				<label>Images</label>
+				<label class="btn btn-default btn-file"><input type="file" multiple (change)="fileChange(input)" #input />
         </label>
 
 
-            </div>
-            <button type="submit" class="btn btn-primary" (click)="OnSaveClick()">Save</button>
-        </form>
+			</div>
+			<button type="submit" class="btn btn-primary" (click)="OnSaveClick()">Save</button>
+		</form>
 
-        <button type="button" id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
-        <div>
-
-
+		<button type="button" id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
+		<div>
 
 
 
 
 
-            <div id="myModal" class="modal modal-wide fade" role="dialog">
-                <div class="modal-dialog  modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Edit Image</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div *ngIf="showSelectedImage">
-                                <table style="height: 600px">
-                                    <tr>
-                                        <td width="100%" valign="center" style="text-align: center;" align="center">
-                                            <img id="selectedImage" class="image" src="{{ selectedImageSrc }}" alt="" />
-                                        </td>
-                                        <!--<td width="135px" valign="top">
+
+
+			<div id="myModal" class="modal modal-wide fade" role="dialog">
+				<div class="modal-dialog  modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Edit Image</h4>
+						</div>
+						<div class="modal-body">
+							<div *ngIf="showSelectedImage">
+								<table style="height: 600px">
+									<tr>
+										<td width="100%" valign="center" style="text-align: center;" align="center">
+											<img id="selectedImage" class="image" src="{{ selectedImageSrc }}" alt="" />
+										</td>
+										<!--<td width="135px" valign="top">
 
                                             <a class='btn btn-default' (click)='onEditClick()' style='width:135px ;margin:5px;text-align:left'>
                                                 <img src="./assets/images/edit.png" style="height:25px" /> Edit
@@ -121,36 +121,42 @@
 
                                             <br/>
                                         </td>-->
-                                    </tr>
-                                </table>
+									</tr>
+								</table>
 
-                                <!--<img id="croppedImage" src='{{ croppedImageSrc }}' alt="" />-->
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+								<!--<img id="croppedImage" src='{{ croppedImageSrc }}' alt="" />-->
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
-            <ul id="listofImages">
-                <li *ngFor="let imageData of project.images" (click)='onSelectImage(imageData.imageSrc)' align="center" style="text-align: center;">
-                    
-                    <img id="image" class="listImage" src='{{ imageData.imageSrc }}' alt="" />
-                    <img id="thumbImage" class="thumbImage" src='{{ imageData.thumbnailSrc }}' alt="" />
+			<ul id="listofImages">
+				<li *ngFor="let imageData of project.images" (click)='onSelectImage(imageData.imageSrc)' align="center" style="text-align: center;">
+
+					<img id="image" class="listImage" src='{{ imageData.imageSrc }}' alt="" />
+					<div>
+						<label style="display: inline-block; text-align: left;verticle-align: middle">{{ imageData.imageName }}</label>
+						<img id="thumbImage" class="thumbImage" src='{{ imageData.thumbnailSrc }}' alt="" />
+					</div>
 
 
-                </li>
-            </ul>
+				</li>
+			</ul>
 
-        </div>
+		</div>
+	</div>
+    <div *ngIf="loading" style=" opacity: 1;
+    animation: fade 2s linear;">
+    <i class="center-fix main-spinner fa fa-spin fa-spinner"></i>
     </div>
-
-    <div class='panel-footer'>
-        <a class='btn btn-default' (click)='onBack()' style='width:80px'>
-            <i class='glyphicon glyphicon-chevron-left'></i> Back
-        </a>
-    </div>
+	<div class='panel-footer'>
+		<a class='btn btn-default' (click)='onBack()' style='width:80px'>
+			<i class='glyphicon glyphicon-chevron-left'></i> Back
+		</a>
+	</div>
 
 </div>
